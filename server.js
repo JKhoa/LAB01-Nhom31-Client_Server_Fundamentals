@@ -3,7 +3,7 @@ const path = require('path');
 const os = require('os');
 
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 // Middleware để parse JSON
 app.use(express.json());

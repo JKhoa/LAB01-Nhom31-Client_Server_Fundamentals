@@ -2,10 +2,9 @@
 ## Nhóm 31
 
 ### Thành viên nhóm
-- [Tên thành viên 1] - [MSSV]
-- [Tên thành viên 2] - [MSSV]
-- [Tên thành viên 3] - [MSSV] (nếu có)
-
+- 2212394 - Nguyễn Hoàng Anh Khoa
+- 2212386 - Phan Thanh Khải
+- 2212388 - Đỗ Trần Quốc Huy
 ### Mô tả bài lab
 Bài thực hành về kiến thức cơ bản Client-Server architecture, bao gồm:
 - Static Web Server với Express.js
@@ -98,11 +97,3 @@ node monitor.js
 ### Báo cáo
 Chi tiết về kiến trúc, implementation và analysis có trong file `docs/technical-report.md`
 
-### Ngày thực hiện
-- **Thực hành:** Thứ Ba, 12/08/2025
-- **Báo cáo:** Thứ Tư, 13/08/2025
-
----
-**Môn học:** Phát triển Ứng dụng Web Nâng cao  
-**Giảng viên:** [Tên giảng viên]  
-**Học kỳ:** [Học kỳ]
