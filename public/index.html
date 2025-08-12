@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 01 - Client-Server Fundamentals | Nhóm 31</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1><i class="fas fa-network-wired"></i> Lab 01 - Client-Server Fundamentals</h1>
+            <p class="subtitle">Nhóm 31 - Phát triển Ứng dụng Web Nâng cao</p>
+            <div class="timestamp">
+                <i class="fas fa-clock"></i>
+                <span id="current-time"></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Server Status Section -->
+        <section class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-server"></i> Server Status</h2>
+                <div class="status-indicator" id="server-status">
+                    <span class="status-dot"></span>
+                    <span>Checking...</span>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="server-info" id="server-info">
+                    <div class="info-item">
+                        <span class="label">Platform:</span>
+                        <span class="value" id="platform">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Node.js Version:</span>
+                        <span class="value" id="node-version">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Uptime:</span>
+                        <span class="value" id="uptime">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Memory Usage:</span>
+                        <span class="value" id="memory-usage">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Testing Section -->
+        <section class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-code"></i> API Testing</h2>
+            </div>
+            <div class="card-content">
+                <div class="api-controls">
+                    <button class="btn btn-primary" onclick="testServerInfo()">
+                        <i class="fas fa-info-circle"></i> Get Server Info
+                    </button>
+                    <button class="btn btn-secondary" onclick="testTimestamp()">
+                        <i class="fas fa-clock"></i> Get Timestamp
+                    </button>
+                    <button class="btn btn-success" onclick="testEcho()">
+                        <i class="fas fa-echo"></i> Test Echo
+                    </button>
+                    <button class="btn btn-warning" onclick="testPerformance()">
+                        <i class="fas fa-tachometer-alt"></i> Performance Test
+                    </button>
+                </div>
+
+                <div class="response-container">
+                    <h3>Response:</h3>
+                    <pre id="api-response" class="response-box">Click a button to test APIs...</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Network Traffic Analysis -->
+        <section class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-chart-line"></i> Network Traffic Analysis</h2>
+            </div>
+            <div class="card-content">
+                <div class="traffic-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-requests">0</div>
+                        <div class="stat-label">Total Requests</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="avg-response-time">0ms</div>
+                        <div class="stat-label">Avg Response Time</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="success-rate">100%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="data-transferred">0 KB</div>
+                        <div class="stat-label">Data Transferred</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-info" onclick="clearStats()">
+                    <i class="fas fa-refresh"></i> Clear Stats
+                </button>
+            </div>
+        </section>
+
+        <!-- Request History -->
+        <section class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-history"></i> Request History</h2>
+            </div>
+            <div class="card-content">
+                <div class="table-container">
+                    <table class="request-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Method</th>
+                                <th>Endpoint</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody id="request-history">
+                            <tr>
+                                <td colspan="6" class="no-data">No requests yet...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Demo -->
+        <section class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-play-circle"></i> Interactive Demo</h2>
+            </div>
+            <div class="card-content">
+                <div class="demo-section">
+                    <h3>Custom Request Builder</h3>
+                    <div class="request-builder">
+                        <select id="http-method" class="form-control">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="DELETE">DELETE</option>
+                        </select>
+
+                        <input type="text" id="request-url" class="form-control" placeholder="Enter API endpoint (e.g., /api/time)" value="/api/time">
+
+                        <textarea id="request-body" class="form-control" placeholder="Request body (JSON format for POST/PUT)" rows="3"></textarea>
+
+                        <button class="btn btn-primary" onclick="sendCustomRequest()">
+                            <i class="fas fa-paper-plane"></i> Send Request
+                        </button>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h3>WebSocket Demo (Bonus)</h3>
+                    <div class="websocket-demo">
+                        <button class="btn btn-info" onclick="initWebSocket()" id="ws-connect">
+                            <i class="fas fa-plug"></i> Connect WebSocket
+                        </button>
+                        <div id="ws-status" class="ws-status">Not connected</div>
+                        <div id="ws-messages" class="ws-messages"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Lab 01 - Nhóm 31 - Phát triển Ứng dụng Web Nâng cao</p>
+            <p>
+                <i class="fas fa-calendar"></i> Thực hiện: 12/08/2025 |
+                <i class="fas fa-presentation"></i> Báo cáo: 13/08/2025
+            </p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing request...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
